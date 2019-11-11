@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">core</string>
+    <string name="access_location_title">Grant Location Permission</string>
+    <string name="access_location_description">The location permission is required to obtain weather data on your location</string>
+    <string name="ok">OK</string>
+
+
+    <string name="hours_ago">%s hours ago</string>
+    <string name="hour_ago">%s hour ago</string>
+    <string name="yesterday">Yesterday, %s</string>
+
+    <string name="moments_ago">Moments ago</string>
+    <string name="mins_ago">%s mins ago</string>
+    <string name="min_ago">%s min ago</string>
 </resources>
