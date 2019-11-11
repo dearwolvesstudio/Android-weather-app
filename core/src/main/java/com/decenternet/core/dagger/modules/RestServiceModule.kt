@@ -30,8 +30,7 @@ class RestServiceModule {
 
     @Provides
     @Singleton
-    internal fun provideRetrofit(
-        httpClient: OkHttpClient): Retrofit {
+    internal fun provideRetrofit(httpClient: OkHttpClient): Retrofit {
         val baseUri = BuildConfig.SERVER_URL
         val retrofit = Retrofit.Builder()
             .client(httpClient)

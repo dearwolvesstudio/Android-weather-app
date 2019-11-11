@@ -9,6 +9,7 @@ import com.decenternet.core.interfaces.ILocationService
 import com.decenternet.core.interfaces.IPermissionsService
 import com.decenternet.core.interfaces.IStringService
 import com.decenternet.core.interfaces.callback.RequestPermissionCallback
+import com.decenternet.core.interfaces.rest.IWeatherRestService
 import com.decenternet.weather.R
 import com.decenternet.weather.WeatherApplication
 import com.decenternet.weather.databinding.ActivityMainBinding
@@ -27,12 +28,15 @@ class MainActivity : AppCompatActivity(), RequestPermissionCallback {
     @Inject
     lateinit var locationService: ILocationService
 
+    @Inject
+    lateinit var weatherRestService: IWeatherRestService
+
 
     lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (this.application as WeatherApplication).weatherComponent?.inject(this)
-        viewModel = MainViewModel(stringService, permissionsService, locationService)
+        viewModel = MainViewModel(stringService, permissionsService, locationService, weatherRestService)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this

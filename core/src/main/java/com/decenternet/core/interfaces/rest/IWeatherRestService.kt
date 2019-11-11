@@ -9,6 +9,5 @@ interface IWeatherRestService {
     @GET("weather")
     fun getWeatherInformation(
         @Query("lat") lat:Double,
-        @Query("lon") lon:Double,
-        @Query("id") draftId:String) : Call<WeatherLocationResponse>
+        @Query("lon") lon:Double) : Call<WeatherLocationResponse>
 }

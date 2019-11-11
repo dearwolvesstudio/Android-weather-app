@@ -28,12 +28,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/standard_margin"
             app:layout_constraintBottom_toTopOf="@+id/barrier"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:visibility="@{safeUnbox(!viewModel.hasLocationDetails ||  viewModel.isLoading ? View.VISIBLE : View.GONE)}"
+            android:visibility="@{safeUnbox(viewModel.isError || viewModel.isLoading ? View.VISIBLE : View.GONE)}"
             android:text="@{viewModel.infoText}" />
         <Button
             android:id="@+id/locationButton"

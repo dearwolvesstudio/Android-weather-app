@@ -7,20 +7,28 @@ import com.decenternet.core.interfaces.ILocationService
 import com.decenternet.core.interfaces.IPermissionsService
 import com.decenternet.core.interfaces.IStringService
 import com.decenternet.core.interfaces.callback.LocationListenerCallback
+import com.decenternet.core.interfaces.rest.IWeatherRestService
 import com.decenternet.core.models.Method
+import com.decenternet.core.models.dto.WeatherLocationResponse
 import com.decenternet.weather.R
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MainViewModel(var stringService: IStringService, var permissionsService: IPermissionsService, var locationService: ILocationService) : ViewModel() {
+class MainViewModel(var stringService: IStringService, var permissionsService: IPermissionsService, var locationService: ILocationService, var weatherRestService: IWeatherRestService) : ViewModel() {
 
     var hasLocationDetails:MutableLiveData<Boolean> = MutableLiveData()
     var isLoading:MutableLiveData<Boolean> = MutableLiveData()
+    var isError:MutableLiveData<Boolean> = MutableLiveData()
     var infoText:MutableLiveData<String> = MutableLiveData()
 
     fun initialize() {
+        isError.value = false
         isLoading.value = false
         hasLocationDetails.value = permissionsService.hasLocationAccess()
         if(!permissionsService.hasLocationAccess()) {
             infoText.value = stringService.get(R.string.no_location_permission)
+            isError.value = true
         }
         else {
             getLocationAndUpdateWeatherDetails()
@@ -29,7 +37,7 @@ class MainViewModel(var stringService: IStringService, var permissionsService: I
 
     fun getLocationAndUpdateWeatherDetails() {
         hasLocationDetails.value = permissionsService.hasLocationAccess()
-
+        isError.value = false
         isLoading.value = true
         infoText.value = stringService.get(R.string.getting_your_location)
 
@@ -38,15 +46,49 @@ class MainViewModel(var stringService: IStringService, var permissionsService: I
             override fun onLocationFound(location: Location?) {
                 locationService.cancel()
                 infoText.value = "Location Found"
+
+                (location)?.let {
+                    getWeatherDetails(it)
+                }
             }
 
             override fun onLocationNotFound() {
                 locationService.cancel()
                 infoText.value = "Location Not Found"
+                isLoading.value = false
+                isError.value = true
             }
         }
 
         locationService.getLocation(Method.NETWORK_THEN_GPS, callback)
+    }
+
+
+    private fun getWeatherDetails(location: Location) {
+
+        infoText.value = "Getting Weather Information"
+        isLoading.value = true
+
+        val call: Call<WeatherLocationResponse> = weatherRestService.getWeatherInformation(location.latitude, location.longitude)
+        call.enqueue(object: Callback<WeatherLocationResponse> {
+            override fun onFailure(call: Call<WeatherLocationResponse>, t: Throwable) {
+                infoText.value = t.localizedMessage
+                isLoading.value = false
+                isError.value = true
+            }
+
+            override fun onResponse(call: Call<WeatherLocationResponse>, response: Response<WeatherLocationResponse>) {
+                isLoading.value = false
+                if (response.isSuccessful && response.body() != null) {
+                    infoText.value = "Fetching Successful!"
+                    isError.value = true
+                }
+                else {
+                    isError.value = true
+                    infoText.value = "An error has occurred while fetching weather data. Please try again"
+                }
+            }
+        })
     }
 
 
