@@ -24,5 +24,5 @@ interface IPermissionsService {
      * @param grantResults - as defined by {@link androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback}
      * @param callback - the code you wish to execute in a success or fail case
      */
-    fun onRequestPermissionsResult(requestCode:Int, @NonNull permissions:Array<String>, @NonNull grantResults:Array<Int>, callback: RequestPermissionCallback)
+    fun onRequestPermissionsResult(requestCode:Int, @NonNull permissions:Array<out String>, @NonNull grantResults:IntArray, callback: RequestPermissionCallback)
 }

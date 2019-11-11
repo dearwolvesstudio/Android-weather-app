@@ -5,6 +5,7 @@
 
     <data>
         <import type="android.view.View" />
+        <import type="com.decenternet.weather.R" />
         <variable
             name="viewModel"
             type="com.decenternet.weather.ui.main.MainViewModel" />
@@ -15,24 +16,48 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
+        <View
+            android:id="@+id/barrier"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:color="@color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/locationButton"
+            app:layout_constraintBottom_toTopOf="@+id/barrier"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:text="@{viewModel.hasPermissionText()}" />
+            android:visibility="@{safeUnbox(!viewModel.hasLocationDetails ||  viewModel.isLoading ? View.VISIBLE : View.GONE)}"
+            android:text="@{viewModel.infoText}" />
         <Button
             android:id="@+id/locationButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ask_for_location"
+            android:visibility="@{safeUnbox(!viewModel.hasLocationDetails ? View.VISIBLE : View.GONE)}"
             android:onClick="askForLocation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{viewModel.isLoading? View.VISIBLE : View.GONE}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

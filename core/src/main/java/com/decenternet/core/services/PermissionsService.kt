@@ -16,7 +16,7 @@ class PermissionsService(private val _context: Context, private val _localiser: 
 
     override fun hasLocationAccess(): Boolean {
         return if (Build.VERSION.SDK_INT >= 23) {
-            _context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            _context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
         } else true
     }
 
@@ -40,7 +40,7 @@ class PermissionsService(private val _context: Context, private val _localiser: 
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: Array<Int>, callback: RequestPermissionCallback) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray, callback: RequestPermissionCallback) {
         when (requestCode) {
             LocationPermission -> {
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
