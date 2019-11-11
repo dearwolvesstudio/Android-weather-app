@@ -5,7 +5,9 @@ import com.decenternet.core.utilities.DateDeserializer
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
@@ -17,17 +19,20 @@ class RestServiceModule {
     @Provides
     @Singleton
     internal fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
+        val apiKey = BuildConfig.API_KEY
+        return OkHttpClient.Builder().addInterceptor {
+            var request: Request = it.request()
+            val url: HttpUrl = request.url().newBuilder().addQueryParameter("appid",apiKey).build()
+            request = request.newBuilder().url(url).build();
+            it.proceed(request)
+        }.build()
     }
 
     @Provides
     @Singleton
     internal fun provideRetrofit(
         httpClient: OkHttpClient): Retrofit {
-
-        var baseUri = BuildConfig.SERVER_URL
-
-
+        val baseUri = BuildConfig.SERVER_URL
         val retrofit = Retrofit.Builder()
             .client(httpClient)
             .addConverterFactory(
