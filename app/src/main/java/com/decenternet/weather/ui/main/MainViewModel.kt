@@ -1,12 +1,16 @@
 package com.decenternet.weather.ui.main
 
+import android.location.Location
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.decenternet.core.interfaces.ILocationService
 import com.decenternet.core.interfaces.IPermissionsService
 import com.decenternet.core.interfaces.IStringService
+import com.decenternet.core.interfaces.callback.LocationListenerCallback
+import com.decenternet.core.models.Method
 import com.decenternet.weather.R
 
-class MainViewModel(var stringService: IStringService, var permissionsService: IPermissionsService) : ViewModel() {
+class MainViewModel(var stringService: IStringService, var permissionsService: IPermissionsService, var locationService: ILocationService) : ViewModel() {
 
     var hasLocationDetails:MutableLiveData<Boolean> = MutableLiveData()
     var isLoading:MutableLiveData<Boolean> = MutableLiveData()
@@ -28,6 +32,21 @@ class MainViewModel(var stringService: IStringService, var permissionsService: I
 
         isLoading.value = true
         infoText.value = stringService.get(R.string.getting_your_location)
+
+
+        val callback = object: LocationListenerCallback {
+            override fun onLocationFound(location: Location?) {
+                locationService.cancel()
+                infoText.value = "Location Found"
+            }
+
+            override fun onLocationNotFound() {
+                locationService.cancel()
+                infoText.value = "Location Not Found"
+            }
+        }
+
+        locationService.getLocation(Method.NETWORK_THEN_GPS, callback)
     }
 
 

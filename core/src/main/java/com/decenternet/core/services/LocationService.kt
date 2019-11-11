@@ -6,25 +6,20 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
+import com.decenternet.core.interfaces.ILocationService
+import com.decenternet.core.interfaces.IPermissionsService
+import com.decenternet.core.interfaces.callback.LocationListenerCallback
+import com.decenternet.core.models.Method
 import com.decenternet.core.utilities.Connectivity
 
 
-class LocationService(private val context: Context, private val permissionsService: PermissionsService) : LocationListener {
-    private val locationManager: LocationManager
+class LocationService(private val context: Context, private val permissionsService: IPermissionsService) : ILocationService, LocationListener {
+
+    private val locationManager: LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     private var method: Method? = null
-    private var callback: Listener? = null
+    private var callback: LocationListenerCallback? = null
 
-    enum class Method {
-        NETWORK,
-        GPS,
-        NETWORK_THEN_GPS
-    }
-
-    init {
-        this.locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    }
-
-    fun getLocation(method: Method, callback: Listener) {
+    override fun getLocation(method: Method, callback: LocationListenerCallback) {
         this.method = method
         this.callback = callback
 
@@ -61,8 +56,6 @@ class LocationService(private val context: Context, private val permissionsServi
     }
 
     private fun requestUpdates(provider: String) {
-
-
         if(!permissionsService.hasLocationAccess()) {
             return
         }
@@ -99,7 +92,7 @@ class LocationService(private val context: Context, private val permissionsServi
         }
     }
 
-    fun cancel() {
+    override fun cancel() {
         Log.d(LOG_TAG, "Locating canceled.")
         this.locationManager.removeUpdates(this)
     }
@@ -131,11 +124,6 @@ class LocationService(private val context: Context, private val permissionsServi
 
     override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
         Log.d(LOG_TAG, "Provided status changed : $provider : status : $status")
-    }
-
-    interface Listener {
-        fun onLocationFound(location: Location?)
-        fun onLocationNotFound()
     }
 
     companion object {
