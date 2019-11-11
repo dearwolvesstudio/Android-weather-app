@@ -2,6 +2,8 @@ package com.decenternet.core.dagger.components
 
 import android.content.Context
 import com.decenternet.core.dagger.modules.*
+import com.decenternet.core.interfaces.IPermissionsService
+import com.decenternet.core.interfaces.IStringService
 import dagger.Component
 import javax.inject.Singleton
 
@@ -10,5 +12,7 @@ import javax.inject.Singleton
 interface CoreComponent {
 
     fun provideApplicationContext(): Context
+    fun provideIStringService(): IStringService
+    fun provideIPermissionsService(): IPermissionsService
 
 }

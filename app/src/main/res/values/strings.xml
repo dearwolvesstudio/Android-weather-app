@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Weather Application</string>
+    <string name="ask_for_location">Ask for location</string>
+    <string name="no_location_permission">This app does not have permission to location</string>
+    <string name="has_location_permission">This app have permissions to location</string>
 </resources>
