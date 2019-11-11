@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity(), RequestPermissionCallback {
 
         viewModel.data.observe(this, Observer<WeatherLocationResponse> {
             val tempCelsius =  (it.main!!.temp?.minus(273.15))
+            binding.currentTextView.setText(it.name!!)
             binding.tempTextView.setText(String.format(Locale.getDefault(), "%.0f°C", tempCelsius))
             binding.descriptionTextView.setText(it.weather!!.get(0).description)
             binding.humidityTextView.setText(String.format(Locale.getDefault(), "%d%%", it.main!!.humidity));

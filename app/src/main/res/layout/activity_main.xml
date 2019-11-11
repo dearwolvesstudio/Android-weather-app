@@ -74,12 +74,12 @@
             android:visibility="@{!viewModel.isLoading &amp;&amp; !viewModel.isError? View.VISIBLE : View.GONE}">
 
             <TextView
+                android:id="@+id/current_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Current"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:textColor="#6452f0"
+                android:textColor="@color/blue_color"
                 android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
@@ -88,7 +88,7 @@
                 android:layout_height="280dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                app:cardBackgroundColor="#6452f0"
+                app:cardBackgroundColor="@color/blue_color"
                 app:cardCornerRadius="30dp">
 
                 <LinearLayout

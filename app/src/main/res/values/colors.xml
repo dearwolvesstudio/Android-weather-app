@@ -11,4 +11,5 @@
     <color name="colorPrimaryNight">#263238</color>
     <color name="colorPrimaryDarkNight">#141d26</color>
     <color name="scrim">#99323232</color>
+    <color name="blue_color">#141F45</color>
 </resources>
