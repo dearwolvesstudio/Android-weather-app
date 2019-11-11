@@ -1,0 +1,79 @@
+buildscript { scriptHandler ->
+    apply from: 'repositories.gradle',
+            to: scriptHandler
+    ext.versions = [
+            'min_version'                          : 16,
+            'target_version'                       : 28,
+            'compile_version'                      : 28,
+            'version_code'                         : 40046,
+            'androidx'                             : '1.0.0',
+            'kotlin'                               : '1.3.50',
+            'core_ktx'                             : '1.0.2',
+            'archLifecycleVersion'                 : '1.1.1',
+            'fabric'                               : '1.26.1',
+            'crashlytics'                          : '2.9.9',
+            'gradle'                               : '3.3.2',
+            'googleservices_version'               : '4.2.0',
+            'fresco_version'                       : '1.13.0',
+            'toro_version'                         : '3.5.2',
+            'volley_version'                       : '1.1.0',
+            'onesignal_version'                    : '3.10.5',
+            'eventbus_version'                     : '3.1.1',
+            'googleplayservices_version'           : '16.0.0',
+            'firebase_version'                     : '16.0.8',
+            'gson_version'                         : '2.8.6',
+            'timber_version'                       : '4.7.1',
+            'scrollgalleryview_version'            : '2.0.7',
+            'charts_version'                       : 'v3.1.0-alpha',
+            'fresco_imageviewer_version'           : '0.5.0',
+            'emojify_version'                      : '0.1.4',
+            'butterknife_version'                  : '10.1.0',
+            'dragdismissactivity_version'          : '1.4.0',
+            'sectionedrecyclerviewadapter_version' : '1.2.0',
+            'readmoretextview_version'             : '2.1.0',
+            'jsoup_version'                        : '1.8.3',
+            'linkpreview_version'                  : '2.0.0@aar',
+            'textdrawable_version'                 : '1.0.1',
+            'silicompressor_version'               : '2.1',
+            'compressor_version'                   : '2.1.0',
+            'transcoder_version'                   : '0.2.0',
+            'ffmpegandroid_version'                : '0.3.2',
+            'flexbox_version'                      : '0.3.2',
+            'toast_version'                        : '1.0.12',
+            'websocketclient_version'              : '1.2.0',
+            'materialcalendar_version'             : '1.0.3',
+            'multicontactpicker_version'           : '1.8.5',
+            'junitVersion'                         : '4.12',
+            'mockitoVersion'                       : '2.28.2',
+            'dagger_version'                       : '2.22.1',
+            'retrofit'                             : '2.5.0',
+            'okhttp'                               : '3.14.1',
+            'buildtools_version'                   : '29.0.2',
+            'roboelectric'                         : '4.2',
+            'test_runner'                          : '1.1.0-beta02',
+            'androidxArch'                         : '2.0.0',
+            'espresso'                             : '3.1.0',
+            'material'                             : '1.1.0-alpha07',
+            'jwt_decode_version'                   : '1.3.0',
+            'constraint_layout_version'            : '1.1.3',
+            'flexbox_layout_version'               : '1.1.0',
+            'image_cropping_lib_version'           : '2.8.0',
+            'signalr_version'                      : '3.0.0'
+    ]
+    ext.names = [
+            'applicationId': 'com.decenternet.weather',
+            'version_name': '1.0.0'
+    ]
+    dependencies {
+        classpath "com.google.gms:google-services:${versions.googleservices_version}"
+        classpath "com.android.tools.build:gradle:${versions.gradle}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

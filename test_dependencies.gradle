@@ -1,0 +1,17 @@
+dependencies {
+    testImplementation "junit:junit:${versions.junitVersion}"
+    testImplementation "org.mockito:mockito-core:${versions.mockitoVersion}"
+    testImplementation "androidx.arch.core:core-testing:${versions.androidxArch}"
+
+    androidTestImplementation "androidx.test:runner:${versions.test_runner}"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:${versions.espresso}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:${versions.espresso}"
+    androidTestImplementation "io.cucumber:cucumber-android:4.3.0"
+    androidTestImplementation 'io.cucumber:cucumber-picocontainer:4.3.0'
+    androidTestImplementation "org.mockito:mockito-android:${versions.mockitoVersion}"
+
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger_version}"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger_version}"
+}
