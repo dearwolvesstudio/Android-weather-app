@@ -9,6 +9,7 @@ apply from: '../repositories.gradle'
 
 android {
     compileSdkVersion versions.compile_version
+    buildToolsVersion "${versions.buildtools_version}"
     defaultConfig {
         applicationId names.applicationId
         minSdkVersion versions.min_version
@@ -23,10 +24,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility = "8"
+        sourceCompatibility = "8"
+    }
     lintOptions {
         abortOnError false
     }
-    buildToolsVersion "${versions.buildtools_version}"
 }
 
 def getInstrumentation() {

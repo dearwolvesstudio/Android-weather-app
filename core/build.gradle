@@ -30,4 +30,9 @@ android {
             buildConfigField "String", "API_KEY", "\"05caab88fab3f6a4a293fb0b6eeb0dcf\""
         }
     }
+
+    compileOptions {
+        targetCompatibility = "8"
+        sourceCompatibility = "8"
+    }
 }
