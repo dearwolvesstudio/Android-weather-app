@@ -8,6 +8,7 @@ import com.decenternet.core.dagger.modules.ContextModule
 import com.decenternet.core.interfaces.CoreComponentProvider
 import com.decenternet.weather.components.DaggerWeatherComponent
 import com.decenternet.weather.components.WeatherComponent
+import com.facebook.drawee.backends.pipeline.Fresco
 
 class WeatherApplication : Application(), CoreComponentProvider {
 
@@ -37,6 +38,7 @@ class WeatherApplication : Application(), CoreComponentProvider {
     override fun onCreate() {
         super.onCreate()
         weatherComponent!!.inject(this)
+        Fresco.initialize(this)
 
     }
 

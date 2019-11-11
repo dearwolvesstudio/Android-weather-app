@@ -5,14 +5,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import com.decenternet.core.BuildConfig
 import com.decenternet.core.interfaces.ILocationService
 import com.decenternet.core.interfaces.IPermissionsService
 import com.decenternet.core.interfaces.IStringService
 import com.decenternet.core.interfaces.callback.RequestPermissionCallback
 import com.decenternet.core.interfaces.rest.IWeatherRestService
+import com.decenternet.core.models.dto.WeatherLocationResponse
 import com.decenternet.weather.R
 import com.decenternet.weather.WeatherApplication
 import com.decenternet.weather.databinding.ActivityMainBinding
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), RequestPermissionCallback {
@@ -42,13 +46,21 @@ class MainActivity : AppCompatActivity(), RequestPermissionCallback {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        viewModel.data.observe(this, Observer<WeatherLocationResponse> {
+            val tempCelsius =  (it.main!!.temp?.minus(273.15))
+            binding.tempTextView.setText(String.format(Locale.getDefault(), "%.0f°C", tempCelsius))
+            binding.descriptionTextView.setText(it.weather!!.get(0).description)
+            binding.humidityTextView.setText(String.format(Locale.getDefault(), "%d%%", it.main!!.humidity));
+            binding.windTextView.setText(String.format(Locale.getDefault(), stringService.get(R.string.wind_unit_label), it.wind!!.speed))
+            binding.weatherIcon.setImageURI(String.format(Locale.getDefault(), BuildConfig.WEATHER_IMAGE_URL_FORMAT, it.weather!!.get(0).icon))
+        })
+
         viewModel.initialize()
     }
 
     fun askForLocation(view: View) {
         permissionsService.requestLocationAccess(this)
     }
-
 
     override fun onPermissionSuccess(permissionName: String) {
         when (permissionName) {

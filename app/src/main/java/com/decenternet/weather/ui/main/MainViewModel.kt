@@ -22,6 +22,8 @@ class MainViewModel(var stringService: IStringService, var permissionsService: I
     var isError:MutableLiveData<Boolean> = MutableLiveData()
     var infoText:MutableLiveData<String> = MutableLiveData()
 
+    var data:MutableLiveData<WeatherLocationResponse> = MutableLiveData()
+
     fun initialize() {
         isError.value = false
         isLoading.value = false
@@ -80,8 +82,8 @@ class MainViewModel(var stringService: IStringService, var permissionsService: I
             override fun onResponse(call: Call<WeatherLocationResponse>, response: Response<WeatherLocationResponse>) {
                 isLoading.value = false
                 if (response.isSuccessful && response.body() != null) {
-                    infoText.value = "Fetching Successful!"
-                    isError.value = true
+                    isError.value = false
+                    data.value = response.body()!!
                 }
                 else {
                     isError.value = true
