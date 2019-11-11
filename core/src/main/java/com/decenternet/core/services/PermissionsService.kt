@@ -35,7 +35,7 @@ class PermissionsService(private val _context: Context, private val _localiser: 
                     builder.setMessage(_localiser.get(R.string.access_location_description))
                         .setTitle(_localiser.get(R.string.access_location_title))
                     builder.setPositiveButton(
-                        _localiser.get(R.string.ok)) { dialog, id ->
+                        _localiser.get(R.string.ok)) { _, _ ->
                         ActivityCompat.requestPermissions(
                             requestingActivity,
                             arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),

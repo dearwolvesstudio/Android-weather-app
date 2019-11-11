@@ -24,6 +24,8 @@ dependencies {
     implementation  "com.google.dagger:dagger-android:${versions.dagger_version}"
     annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger_version}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger_version}"
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger_version}"
 
     // REST
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"

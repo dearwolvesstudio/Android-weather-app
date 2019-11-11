@@ -3,8 +3,10 @@ package com.decenternet.weather
 import android.app.Application
 
 import com.decenternet.core.dagger.components.CoreComponent
+import com.decenternet.core.dagger.components.DaggerCoreComponent
 import com.decenternet.core.dagger.modules.ContextModule
 import com.decenternet.core.interfaces.CoreComponentProvider
+import com.decenternet.weather.components.DaggerWeatherComponent
 import com.decenternet.weather.components.WeatherComponent
 
 class WeatherApplication : Application(), CoreComponentProvider {
@@ -21,7 +23,7 @@ class WeatherApplication : Application(), CoreComponentProvider {
             return _component
         }
 
-    override fun providesCoreComponent(): CoreComponent {
+    override fun providesCoreComponent(): CoreComponent? {
         if (coreComponent == null) {
             coreComponent = DaggerCoreComponent
                 .builder()
@@ -39,7 +41,6 @@ class WeatherApplication : Application(), CoreComponentProvider {
     }
 
     companion object {
-
         private var coreComponent: CoreComponent? = null
         private var _component: WeatherComponent? = null
     }

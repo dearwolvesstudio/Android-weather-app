@@ -4,5 +4,5 @@ import com.decenternet.core.dagger.components.CoreComponent
 
 interface CoreComponentProvider {
 
-    fun providesCoreComponent(): CoreComponent
+    fun providesCoreComponent(): CoreComponent?
 }
