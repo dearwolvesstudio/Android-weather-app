@@ -32,7 +32,9 @@ android {
             buildConfigField "String", "WEATHER_IMAGE_URL_FORMAT", "\"http://openweathermap.org/img/wn/%s@2x.png\""
         }
     }
-
+    lintOptions {
+        abortOnError false
+    }
     compileOptions {
         targetCompatibility = "8"
         sourceCompatibility = "8"
