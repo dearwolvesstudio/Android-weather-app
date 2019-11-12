@@ -6,4 +6,6 @@
     <string name="getting_your_location">Getting location…</string>
 
     <string name="wind_unit_label">%.0f km/hr</string>
+    <string name="wind">Wind</string>
+    <string name="humidity">Humidity</string>
 </resources>

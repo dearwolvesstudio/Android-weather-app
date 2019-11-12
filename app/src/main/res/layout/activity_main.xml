@@ -5,7 +5,6 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="com.decenternet.weather.R" />
         <variable
             name="viewModel"
             type="com.decenternet.weather.ui.main.MainViewModel" />
@@ -78,7 +77,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Current"
                 android:textColor="@color/blue_color"
                 android:textStyle="bold" />
 
@@ -86,8 +84,8 @@
                 style="@style/Widget.MaterialComponents.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="@dimen/large_padding"
+                android:layout_marginEnd="@dimen/large_padding"
                 app:cardBackgroundColor="@color/blue_color"
                 app:cardCornerRadius="30dp">
 
@@ -95,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingTop="5dp">
+                    android:paddingTop="@dimen/medium_padding">
 
                     <TextView
                         android:id="@+id/temp_text_view"
@@ -114,8 +112,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginStart="@dimen/big_padding"
+                        android:layout_marginLeft="@dimen/big_padding"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -129,18 +127,18 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:padding="10dp">
+                                android:padding="@dimen/padding">
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     style="@style/TextViewInColoredCard"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Humidity"
+                                    android:text="@string/humidity"
                                     android:textStyle="bold" />
 
                                 <View
-                                    android:layout_width="5dp"
+                                    android:layout_width="@dimen/medium_padding"
                                     android:layout_height="0dp" />
 
                                 <TextView
@@ -155,18 +153,18 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:padding="10dp">
+                                android:padding="@dimen/padding">
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     style="@style/TextViewInColoredCard"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Wind"
+                                    android:text="@string/wind"
                                     android:textStyle="bold" />
 
                                 <View
-                                    android:layout_width="5dp"
+                                    android:layout_width="@dimen/medium_padding"
                                     android:layout_height="0dp" />
 
                                 <TextView
