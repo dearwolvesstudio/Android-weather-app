@@ -47,8 +47,6 @@ class MainViewModel(var stringService: IStringService, var permissionsService: I
         val callback = object: LocationListenerCallback {
             override fun onLocationFound(location: Location?) {
                 locationService.cancel()
-                infoText.value = "Location Found"
-
                 (location)?.let {
                     getWeatherDetails(it)
                 }
@@ -56,7 +54,7 @@ class MainViewModel(var stringService: IStringService, var permissionsService: I
 
             override fun onLocationNotFound() {
                 locationService.cancel()
-                infoText.value = "Location Not Found"
+                infoText.value = stringService.get(R.string.location_not_found)
                 isLoading.value = false
                 isError.value = true
             }
@@ -68,7 +66,7 @@ class MainViewModel(var stringService: IStringService, var permissionsService: I
 
     private fun getWeatherDetails(location: Location) {
 
-        infoText.value = "Getting Weather Information"
+        infoText.value = stringService.get(R.string.getting_weather_information)
         isLoading.value = true
 
         val call: Call<WeatherLocationResponse> = weatherRestService.getWeatherInformation(location.latitude, location.longitude)
@@ -87,7 +85,7 @@ class MainViewModel(var stringService: IStringService, var permissionsService: I
                 }
                 else {
                     isError.value = true
-                    infoText.value = "An error has occurred while fetching weather data. Please try again"
+                    infoText.value = stringService.get(R.string.weather_fetching_error)
                 }
             }
         })

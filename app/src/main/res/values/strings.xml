@@ -4,6 +4,9 @@
     <string name="no_location_permission">This app does not have permission to location</string>
     <string name="has_location_permission">This app have permissions to location</string>
     <string name="getting_your_location">Getting location…</string>
+    <string name="location_not_found">"Location Not Found"</string>
+    <string name="getting_weather_information">"Getting Weather Information…"</string>
+    <string name="weather_fetching_error">An error has occurred while fetching weather data. Please try again</string>
 
     <string name="wind_unit_label">%.0f km/hr</string>
     <string name="wind">Wind</string>
